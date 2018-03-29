@@ -1,0 +1,29 @@
+{
+  "name": "path-matching",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "nyc ava --verbose --no-cache",
+    "test:watch": "nyc ava --verbose --watch --no-cache",
+    "report": "nyc report --reporter=html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/astroboy-lab/path-matching.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/astroboy-lab/path-matching/issues"
+  },
+  "homepage": "https://github.com/astroboy-lab/path-matching#readme",
+  "devDependencies": {
+    "ava": "^0.25.0",
+    "nyc": "^11.6.0"
+  },
+  "dependencies": {
+    "path-to-regexp": "^2.2.0"
+  }
+}
