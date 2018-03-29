@@ -1,9 +1,16 @@
 sudo: false
 language: node_js
 node_js:
-  - '8'
-  - '9'
+- '8'
+- '9'
 install:
-  - npm install
+- npm install
+- npm install -g codecov
 script:
-  - npm test
+- npm test
+- npm run report-coverage
+after_script:
+- codecov
+env:
+  global:
+    secure: k0YkdbCu49FH7uuZLClk/U7Qd/WhZZ0jSStWEz7deYtu3K5gbTr/7vHsAG8BWV7z79l3LUjV7wa3HYmFfHabjZFNxk4wLYav8WAGZj8LoYX5CEOO2hql4vgFzt3RmvBm2iN2RbuPpRDqrard1PGovTgD6IbobFZpkwojO8diXwrVY7LRaQ+BdWvwyMyZzlAsh6R9QVkGD3eOUvl0/C4wJXIeQYX0CJ9R6IRJTxzCExc3Py45yfgbPbZuCaeYGYBBzQpDLz9v8KGbiWgKSU0V/QUFshjnRP8Gm0FEv5xqkh/3utF2NJQ8esjdZqSfS94ep5ts8zoAzh9klQlkoHvbHN/oxyecmg00NDjbOvouo7FlqFU99Ds2pMBZRGDmwmkTt35qmHhJ6PstkUohYYZHsABALgXbzxGD5GzokRu962gjCkYrquoO7eSbSYRhkCjL3TbBxz+LXcqWmwQjlTA8aF7t2X9Ve1A/Do1cw/Bj/I+Ij8iqYXQ1Mld6Mu5gSd9lYq13zMF+OlUCZr3xBOx68weczwentCR904r40vM5UaJXwHRKPVECLvEGyKKfy85//OFXhv5N6fEXGcl+lA4fYlTUXs5jZnJZCjWHDRndgb4xG3HS8FyBaoOscd6C/JpkV1Wg0fImzP3RgU3edB04ZkdrN6HEbawbuHEBZRkAojQ=
