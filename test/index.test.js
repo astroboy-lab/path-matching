@@ -14,7 +14,7 @@ test('options.match and options.ignore both not present should always return tru
   t.true(fn());
 });
 
-test('support string', t => {
+test('match support string', t => {
   const fn = pathMatching({ match: '/api' });
   t.true(fn({ path: '/api' }));
   t.true(fn({ path: '/api/' }));
@@ -23,7 +23,7 @@ test('support string', t => {
   t.false(fn({ path: '/api1/hello' }));
 });
 
-test('support regexp', t => {
+test('match support regexp', t => {
   const fn = pathMatching({ match: /^\/api/ });
   t.true(fn({ path: '/api' }));
   t.true(fn({ path: '/api/' }));
@@ -33,7 +33,7 @@ test('support regexp', t => {
   t.false(fn({ path: '/hello' }));
 });
 
-test('support function', t => {
+test('match support function', t => {
   const fn = pathMatching({
     match: ctx => ctx.path.startsWith('/api'),
   });
@@ -44,3 +44,33 @@ test('support function', t => {
   t.true(fn({ path: '/api1/hello' }));
   t.false(fn({ path: '/hello' }));
 });
+
+test('match support array', t => {
+  const fn = pathMatching({
+    match: [
+      '/foo',
+      /^\/bar/,
+      ctx => ctx.path.startsWith('/api')
+    ]
+  });
+  t.true(fn({ path: '/foo' }));
+  t.true(fn({ path: '/foo/bar' }));
+  t.true(fn({ path: '/bar/foo' }));
+  t.true(fn({ path: '/api' }));
+  t.true(fn({ path: '/api1' }));
+  t.true(fn({ path: '/api/hello' }));
+  t.false(fn({ path: '/hello' }));
+});
+
+test('ignore support string', t => {
+  const fn = pathMatching({
+    ignore: '/foo'
+  });
+  t.false(fn({ path: '/foo' }));
+  // t.true(fn({ path: '/foo1' }));
+  // t.false(fn({ path: '/foo/' }));
+  // t.false(fn({ path: '/foo/bar' }));
+  // t.true(fn({ path: '/hello' }));
+});
+
+

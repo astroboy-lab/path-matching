@@ -1,7 +1,6 @@
 const pathToRegexp = require('path-to-regexp');
 
-module.exports = function(options) {
-  options = options || {};
+module.exports = function pathMatching(options = {}) {
   if (options.match && options.ignore) throw new Error('options.match and options.ignore can not both present');
   if (!options.match && !options.ignore) return () => true;
 
@@ -15,7 +14,7 @@ module.exports = function(options) {
 
 function toPathMatch(pattern) {
   if (typeof pattern === 'string') {
-    const reg = pathToRegexp(pattern, [], { end: false });
+    const reg = pathToRegexp(pattern, []);
     if (reg.global) reg.lastIndex = 0;
     return ctx => reg.test(ctx.path);
   }
